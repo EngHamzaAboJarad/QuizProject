@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quize/datagetx.dart';
+import 'package:quize/conteroller/datagetx.dart';
 
 class result extends StatefulWidget {
   int i = 0 ;
@@ -40,7 +40,7 @@ class _resultState extends State<result> {
           ),
           ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context,'home');
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.greenAccent,

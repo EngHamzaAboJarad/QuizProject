@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quize/CreateQuiz.dart';
-import 'package:quize/StartCuiz.dart';
+import 'package:quize/Screen/CreateQuiz.dart';
+import 'package:quize/Screen/StartCuiz.dart';
+import 'package:quize/db/SharedPreferencesApp.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -21,15 +22,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Center(
-                    child: Text(
-                      'N',
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                    ),
+                    child: Icon(Icons.person_2,size: 24,)
                   ),
                 ),
-                accountName: Text('Name'),
-                accountEmail: Text('Name@gmail.com')),
+                accountName: Text(SharedPreferencesApp().nameUser),
+                accountEmail: Text(SharedPreferencesApp().emailUser)),
             ListTile(
               onTap: () {
                 Navigator.push(
@@ -52,6 +49,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Divider(),
             ListTile(
+              onTap: ()async{
+                Navigator.pushNamed(context,'update');
+              },
+              leading: Icon(Icons.account_box_outlined,size: 24,),
+              title: Text('EditeProfile'),
+            ),
+            Divider(),
+            ListTile(
+              onTap: ()async{
+                await SharedPreferencesApp().clearData();
+                Navigator.pushReplacementNamed(context,'login');
+              },
               leading: Icon(Icons.login),
               title: Text('Exit'),
             )

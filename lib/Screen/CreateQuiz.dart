@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quize/AddQuestion.dart';
-import 'package:quize/datagetx.dart';
+import 'package:quize/Screen/AddQuestion.dart';
+import 'package:quize/Utils/ShowAlertDialog.dart';
+import 'package:quize/conteroller/datagetx.dart';
 
 class CreateQuiz extends StatefulWidget {
   const CreateQuiz({Key? key}) : super(key: key);
@@ -150,45 +151,6 @@ class _CreateQuizState extends State<CreateQuiz> {
           ),
         ),
       ),
-    );
-  }
-  showAlertDialog(BuildContext context,String id) {
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Delete question"),
-      content: Text("Are you sure want  to delete  this question"),
-      actions: [
-        TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            style: TextButton.styleFrom(
-                backgroundColor: Colors.greenAccent,
-                minimumSize: Size(70, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8))),
-            child: Text('cancel')),
-        TextButton(
-            onPressed: () {
-              data.to.deleteItem(int.parse(id));
-              Navigator.of(context).pop();
-              setState(() {
-              });
-            },
-            style: TextButton.styleFrom(
-                backgroundColor: Colors.greenAccent,
-                minimumSize: Size(70, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8))),
-            child: Text('Delete')),
-      ],
-    );
-    // viser dialogvinduet
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

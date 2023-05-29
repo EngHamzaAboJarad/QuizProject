@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:quize/datagetx.dart';
-import 'package:quize/result.dart';
+import 'package:quize/conteroller/datagetx.dart';
+import 'package:quize/Screen/result.dart';
 
 class SatrtQuiz extends StatefulWidget {
   const SatrtQuiz({Key? key}) : super(key: key);
@@ -40,6 +40,7 @@ class _SatrtQuizState extends State<SatrtQuiz> {
       body: data.to.items.isNotEmpty
           ? Column(
               children: [
+                SizedBox(height: 50,),
                 Text(
                   'Question $i / ${data.to.items.length}',
                   style: TextStyle(
@@ -54,6 +55,7 @@ class _SatrtQuizState extends State<SatrtQuiz> {
                     onPageChanged: (value) {
                       setState(() {
                         page = value;
+                        i = value+1;
                       });
                     },
                     controller: pageController,
@@ -78,27 +80,11 @@ class _SatrtQuizState extends State<SatrtQuiz> {
                                       child: Text(e.name),
                                     ),
                                   ),
+                                  Divider(),
                                   SizedBox(height: 4,),
                                   InkWell(
                                     onTap: (){
-                                     if(e.S.toLowerCase()=='a'){
-                                       setState(() {
-                                         sum++;
-                                       });
-                                       if(page+1 == data.to.items.length){
-                                         log('${page-1 == data.to.items.length}');
-                                         Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                       }else{
-                                         pageController.jumpToPage(page+1);
-                                       }
-                                     }else{
-                                       if(page+1 == data.to.items.length){
-                                         log('${page-1 == data.to.items.length}');
-                                         Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                       }else{
-                                         pageController.jumpToPage(page+1);
-                                       }
-                                     }
+                                     Q(Answer: e.S, context: context,check: 'a');
                                     },
                                     child: Container(
                                       width: 370,
@@ -119,24 +105,7 @@ class _SatrtQuizState extends State<SatrtQuiz> {
                                   SizedBox(height: 4,),
                                   InkWell(
                                     onTap: (){
-                                      if(e.S.toLowerCase()=='b'){
-                                        setState(() {
-                                          sum++;
-                                        });
-                                        if(page+1 == data.to.items.length){
-                                          log('${page-1 == data.to.items.length}');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                        }else{
-                                          pageController.jumpToPage(page+1);
-                                        }
-                                      }else{
-                                        if(page+1 == data.to.items.length){
-                                          log('${page-1 == data.to.items.length}');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                        }else{
-                                          pageController.jumpToPage(page+1);
-                                        }
-                                      }
+                                      Q(Answer: e.S,context:  context,check: 'b');
                                     },
                                     child: Container(
                                       width: 370,
@@ -157,24 +126,7 @@ class _SatrtQuizState extends State<SatrtQuiz> {
                                   SizedBox(height: 4,),
                                   InkWell(
                                     onTap: (){
-                                      if(e.S.toLowerCase()=='c'){
-                                        setState(() {
-                                          sum++;
-                                        });
-                                        if(page+1 == data.to.items.length){
-                                          log('${page-1 == data.to.items.length}');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                        }else{
-                                          pageController.jumpToPage(page+1);
-                                        }
-                                      }else{
-                                        if(page+1 == data.to.items.length){
-                                          log('${page-1 == data.to.items.length}');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                        }else{
-                                          pageController.jumpToPage(page+1);
-                                        }
-                                      }
+                                      Q(Answer: e.S,context:  context,check: 'c');
                                     },
                                     child: Container(
                                       width: 370,
@@ -195,24 +147,7 @@ class _SatrtQuizState extends State<SatrtQuiz> {
                                   SizedBox(height: 4,),
                                   InkWell(
                                     onTap: (){
-                                      if(e.S.toLowerCase()=='d'){
-                                        setState(() {
-                                          sum++;
-                                        });
-                                        if(page+1 == data.to.items.length){
-                                          log('${page-1 == data.to.items.length}');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                        }else{
-                                          pageController.jumpToPage(page+1);
-                                        }
-                                      }else{
-                                        if(page+1 == data.to.items.length){
-                                          log('${page-1 == data.to.items.length}');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
-                                        }else{
-                                          pageController.jumpToPage(page+1);
-                                        }
-                                      }
+                                      Q(Answer: e.S, context: context,check: 'd');
                                     },
                                     child: Container(
                                       width: 370,
@@ -273,5 +208,26 @@ class _SatrtQuizState extends State<SatrtQuiz> {
               ],
             ),
     );
+  }
+
+  void Q({required String Answer ,required BuildContext context,required String check}) {
+    if(Answer.toLowerCase()==check){
+      setState(() {
+        sum++;
+      });
+      if(page+1 == data.to.items.length){
+        log('${page-1 == data.to.items.length}');
+        Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
+      }else{
+        pageController.jumpToPage(page+1);
+      }
+    }else{
+      if(page+1 == data.to.items.length){
+        log('${page-1 == data.to.items.length}');
+        Navigator.push(context, MaterialPageRoute(builder: (context) => result(i: sum),));
+      }else{
+        pageController.jumpToPage(page+1);
+      }
+    }
   }
 }

@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   sqflite: ^2.0.0
   path_provider: ^2.0.2
+  shared_preferences: any
   get: 
 
 dev_dependencies:
